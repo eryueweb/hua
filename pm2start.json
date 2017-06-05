@@ -1,9 +1,10 @@
 {
   "apps": [
     {
-      "name": "games",
+      "name": "huahua-games",
       "script": "bin/www",
-      "watch": "../",
+      "cwd": "./",
+      "watch": false,
       "log_date_format": "YYYY-MM-DD HH:mm Z"
     }
   ]
