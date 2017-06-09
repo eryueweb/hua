@@ -22,7 +22,7 @@ node_modules/
 _MACOSX/
 
 #config
-#proxy.js
-#mysql.config.js
+proxy.js
+mysql.config.js
 
 

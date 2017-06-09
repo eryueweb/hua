@@ -23,7 +23,7 @@ var server=require('http').createServer(function(req,res){
       proxy.web(req,res,{target:'http://129.189.199.235:3000'});
       break;
     case 'zhishangzhi.com:3000':
-      proxy.web(req,res,{target:'http://129.189.199.235:3000'});
+      proxy.web(req,res,{target:'http://139.199.189.225:3000'});
       break;
     default: 
       res.writeHead(200, { 
