@@ -1,0 +1,8 @@
+{
+	"appendors": [
+		{
+			"type": "console",
+			"level": "INFO" 
+		}
+	]
+}

@@ -1,11 +1,7 @@
-*.log
-
-# Package Files #
+# Package Files
 *.jar
 *.war
 *.ear
-
-
 
 # eclipse conf
 .project
@@ -17,5 +13,16 @@
 # logs
 logs/
 pm2logs/
+*.log
+
+# node
 node_modules/
+
+# mac
+_MACOSX/
+
+#config
+#proxy.js
+#mysql.config.js
+
 

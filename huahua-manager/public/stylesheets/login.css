@@ -1,0 +1,5 @@
+body{background-image: url(../images/login/bg.jpg);background-size: cover;background-repeat: no-repeat;}
+.login-w{padding: 20px 50px;width: 300px;text-align: center;}
+.login-row{margin-top: 20px;}
+#userName,#password{line-height: 24px;font-size: 18px;padding: 6px 10px;}
+input#login{background: none;border: none;cursor: pointer;text-shadow: 0px 0px 4px #444;font-size: 18px;}

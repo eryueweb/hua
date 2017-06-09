@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>花花-后台管理</title>
+	<link rel="stylesheet"  type="text/css" href="dist/css/common.css">
+	<link rel="stylesheet"  type="text/css" href="dist/css/index.css">
+</head>
+<body>
+	<!-- <div class="overlay"></div> -->
+	<div class="dialog banner-dialog">
+		<div class="dialog-con banner-dialog-con">
+			<form class="form-addBanner">
+				<div class="form-row">
+					<label for="picUrl">选择图片：</label><input type="file" name="picUrl" id="picUrl"/>
+				</div>
+				<div class="form-btns">
+					<input type="submit" value="确定" class="btn submitBtn" />
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="dialog pic-add-dialog">
+		<div class="dialog-con pic-dialog-con">
+			<form class="form-addPic">
+				<input type="hidden" value="animal" name="type" id="type">
+				<div class="form-row"> 
+					<label for="picFile">选择图片：</label><input type="file" name="picFile" id="picFile"/>
+				</div>
+				<div class="form-row">
+					<label for="instruction">图片说明：</label><textarea name="instruction" id="instruction"></textarea>
+				</div>
+				<div class="form-btns">
+					<input type="submit" value="确定" class="btn submitBtn" />
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="dialog pic-edit-dialog">
+		<div class="dialog-con pic-dialog-con">
+			<form class="form-editPic">
+				<input type="hidden" name="type" id="type" value="" ／>
+				<input type="hidden" name="id" id="id" value="" ／>
+				<input type="hidden" name="picUrl" id="picUrl" value="" ／>
+				<div class="form-row"> 
+					<label for="picFile">选择图片：</label><input type="file" name="picFile" id="picFile"/>
+				</div>
+				<div class="form-row">
+					<label for="instruction">图片说明：</label><textarea name="instruction" id="instruction"></textarea>
+				</div>
+				<div class="form-btns">
+					<input type="submit" value="确定" class="btn submitBtn" />
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="dialog blog-add-dialog">
+		<div class="dialog-con blog-dialog-con">
+			<form class="form-add-blog" action="">
+				<input type="reset" name="blogReset" id="blogReset" style="display: none;">
+				<input type="hidden" name="picUrl" id="picUrl" value="">
+				<input type="hidden" name="id" id="id" value="">
+				<input type="hidden" name="content" id="content" value="">
+				<input type="hidden" name="brief" id="brief" value="">
+				<div class="form-row"> 
+					<label for="category">分类：</label>
+					<select type="file" name="category" id="category">
+						<option value="其他">其他</option>
+					</select>
+				</div>
+				<div class="form-row">
+					<label for="title">标题：</label><input type="text" name="title" id="title" />
+				</div>
+				<div class="form-row"> 
+					<label for="blogPicFile">选择图片：</label><input type="file" name="blogPicFile" id="blogPicFile"/>
+				</div>
+				<div class="form-row">
+					<label for="author">作者：</label><input type="text" name="author" id="author" placeholder="February" value="February" />
+				</div>
+				<div class="form-row">
+					<label for="keywords">关键字：</label><input type="text" name="keywords" id="keywords" placeholder="用英文','分隔" />
+				</div>
+				<div class="form-row">
+					<label for="content">内容：</label>
+					<div id="blogEditorAdd"></div>
+					<!-- <textarea name="content" id="content"></textarea> -->
+				</div>
+				<div class="form-btns">
+					<input type="submit" value="确定" class="btn submitBtn" />
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="dialog blog-edit-dialog">
+		<div class="dialog-con blog-dialog-con">
+			<form class="form-edit-blog" action="">
+				<input type="reset" name="blogReset" id="blogReset" style="display: none;">
+				<input type="hidden" name="picUrl" id="picUrl" value="">
+				<input type="hidden" name="id" id="id" value="">
+				<input type="hidden" name="content" id="content" value="">
+				<input type="hidden" name="brief" id="brief" value="">
+				<div class="form-row"> 
+					<label for="category">分类：</label>
+					<select type="file" name="category" id="category">
+						<option value="其他">其他</option>
+					</select>
+				</div>
+				<div class="form-row">
+					<label for="title">标题：</label><input type="text" name="title" id="title" />
+				</div>
+				<div class="form-row"> 
+					<label for="blogPicFile">选择图片：</label><input type="file" name="blogPicFile" id="blogPicFile"/>
+				</div>
+				<div class="form-row">
+					<label for="author">作者：</label><input type="text" name="author" id="author" placeholder="February" value="February" />
+				</div>
+				<div class="form-row">
+					<label for="keywords">关键字：</label><input type="text" name="keywords" id="keywords" placeholder="用英文','分隔" />
+				</div>
+				<div class="form-row">
+					<label for="content">内容：</label>
+					<div id="blogEditor"></div>
+					<!-- <textarea name="content" id="content"></textarea> -->
+				</div>
+				<div class="form-btns">
+					<input type="submit" value="确定" class="btn submitBtn" />
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="container">
+		<div class="manager-tab">
+			<ul class="clearfix">
+				<li id="banner-manager" class="current"><a href="javascript:">banner</a></li>
+				<li id="pic-manager"><a href="javascript:">pic</a></li>
+				<li id="blog-manager"><a href="javascript:">blog</a></li>
+				<!-- <li id="broadcast-manager"><a href="javascript:">broadcast</a></li> -->
+			</ul>
+		</div>
+		<div class="manager-box">
+			<div class="banner-manager detail">
+				<div class="btns">
+					<a href="javascript:" class="addBtn btn">添加</a>
+				</div>
+				<table class="banner-table">
+					<thead>
+						<th>id</th>
+						<th>图片</th>
+						<th>操作</th>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+			<div class="pic-manager detail clearfix">
+				<div class="sideBar">
+					<ul>
+						<li><a href="javascript:" class="pic-current" data-type="animal">萌宠</a></li>
+						<li><a href="javascript:" data-type="comic">漫画</a></li>
+						<li><a href="javascript:" data-type="scenery">美景</a></li>
+						<li><a href="javascript:" data-type="character">美人</a></li>
+					</ul>
+				</div>
+				<div class="picCon">
+					<div class="btns">
+						<a href="javascript:" class="addBtn btn">添加</a>
+					</div>
+					<table class="pic-table" style="table-layout:fixed;">
+						<thead>
+							<th>id</th>
+							<th>图片</th>
+							<th>作者</th>
+							<th>说明</th>
+							<th>喜欢</th>
+							<th>上传时间</th>
+							<th>操作</th>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="blog-manager detail">
+				<div class="btns">
+					<a href="javascript:" class="addBtn btn">添加</a>
+				</div>
+				<table class="blog-table">
+					<thead>
+						<th>id</th>
+						<th>分类</th>
+						<th>标题</th>
+						<th>图片</th>
+						<th>作者</th>
+						<th>时间</th>
+						<th>评论</th>
+						<th>赞</th>
+						<th>操作</th>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+			<div class="broadcast-manager detail">
+				
+			</div>
+		</div>
+	</div>
+	<script type="text/template" id="bannerList_tpl">
+		{{#items}}
+		<tr>
+			<td>{{id}}</td>
+			<td><a href="{{picUrl}}" target="_blank"><img src="{{picUrl}}" width='100px' style="vertical-align: middle;"></a></td>
+			<td><a href="javascript:" class="delBtn btn" data-id="{{id}}" data-url="{{picUrl}}">删除</a></td>
+		</tr>
+		{{/items}}
+	</script>
+	<script type="text/template" id="picList_tpl">
+		{{#items}}
+		<tr>
+			<td nowrap>{{id}}</td>
+			<td nowrap><a href="{{picUrl}}" target="_blank"><img src="{{picUrl}}" width='100px' style="vertical-align: middle;"></a></td>
+			<td>{{author}}</td>
+			<td align="left" width="150px" style="word-wrap:break-word;">{{instruction}}</td>
+			<td nowrap>{{heartNum}}</td>
+			<td nowrap>{{collectConvertDate}}</td>
+			<td nowrap>
+				<p style="padding-top: 16px;"><a href="javascript:" class="delBtn btn" data-id="{{id}}" data-url="{{picUrl}}">删除</a></p>
+				<p style="padding-bottom: 16px;"><a href="javascript:" class="editBtn btn" data-id="{{id}}" data-url="{{picUrl}}">编辑</a></p>
+			</td>
+		</tr>
+		{{/items}}
+	</script>
+	<script type="text/template" id="blogList_tpl">
+		{{#items}}
+		<tr>
+			<td>{{id}}</td>
+			<td>{{category}}</td>
+			<td>{{title}}</td>
+			<td><img src="{{picUrl}}" width='100px' style="vertical-align: middle;"></td>
+			<td>{{author}}</td>
+			<td>{{createConvertTime}}</td>
+			<td>{{commentNum}}</td>
+			<td>{{praiseNum}}</td>
+			<td>
+				<p style="padding-top: 16px;"><a href="javascript:" class="delBtn btn" data-id="{{id}}" data-url="{{picUrl}}">删除</a></p>
+				<p style="padding-bottom: 16px;"><a href="javascript:" class="editBtn btn" data-id="{{id}}" data-url="{{picUrl}}">编辑</a></p>
+			</td>
+		</tr>
+		{{/items}}
+	</script>
+	<script src="dist/js/common.js"></script>
+	<script src="dist/js/index.js"></script>
+	<script src="dist/js/banner.js"></script>
+	<script src="dist/js/pic.js"></script>
+	<script src="dist/js/blog.js"></script>
+</body>
+</html>

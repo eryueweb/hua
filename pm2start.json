@@ -1,8 +1,29 @@
 {
   "apps": [
     {
+      "name": "huahua-manager",
+      "script": "huahua-manager/bin/www",
+      "cwd": "huahua-manager",
+      "watch": false,
+      "log_date_format": "YYYY-MM-DD HH:mm Z"
+    },
+    {
+      "name": "huahua",
+      "script": "huahua/bin/www",
+      "cwd": "huahua",
+      "watch": false,
+      "log_date_format": "YYYY-MM-DD HH:mm Z"
+    },
+    {
       "name": "huahua-games",
-      "script": "bin/www",
+      "script": "huahua-games/bin/www",
+      "cwd": "huahua-games",
+      "watch": false,
+      "log_date_format": "YYYY-MM-DD HH:mm Z"
+    },
+    {
+      "name":"hua",
+      "script": "proxy.js",
       "cwd": "./",
       "watch": false,
       "log_date_format": "YYYY-MM-DD HH:mm Z"
