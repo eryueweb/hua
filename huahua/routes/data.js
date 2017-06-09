@@ -3,7 +3,6 @@ let router = express.Router();
 let log4js = require('log4js');
 let logger = log4js.getLogger('interface');
 
-let $userSqlOperate = require('../data/user/userSqlOperate');
 /*service*/
 let $bannerServ = require('../service/bannerServ');
 let $picServ = require('../service/picServ');
