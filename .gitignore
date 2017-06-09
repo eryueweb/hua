@@ -20,6 +20,7 @@ node_modules/
 
 # mac
 _MACOSX/
+.DS_store
 
 #config
 proxy.js
