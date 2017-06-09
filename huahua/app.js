@@ -13,7 +13,6 @@ var webpackConfig = require('./webpack.config');
 var compiler = webpack(webpackConfig);
 // routes
 var routes = require('./routes/index');
-var users = require('./routes/users');
 var data = require('./routes/data');
 
 var app = express();
@@ -43,7 +42,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/', routes);
-app.use('/users', users);
 app.use('/data', data);
 
 // catch 404 and forward to error handler
