@@ -24,5 +24,6 @@ _MACOSX/
 #config
 proxy.js
 mysql.config.js
+mysqlConfig.js
 
 
