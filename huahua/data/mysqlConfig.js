@@ -4,7 +4,7 @@ module.exports = {
 		connectionLimit: 10,
 		host: 'localhost',
 		user: 'root',
-		password: '24680',
+		password: 'root',
 		port: '3306',
 		database: 'huahua',
 		queueLimit: 2,
