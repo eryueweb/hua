@@ -7,19 +7,6 @@ let logger = log4js.getLogger('interface');
 let $bannerServ = require('../service/bannerServ');
 let $picServ = require('../service/picServ');
 let $blogServ = require('../service/blogServ');
-/* GET users listing. */
-router.get('/add', function(req, res, next) {
-	$userSqlOperate.add(req,res,next)
-});
-router.get('/delete', function(req, res, next) {
-	$userSqlOperate.delete(req,res,next)
-});
-router.get('/update', function(req, res, next) {
-	$userSqlOperate.update(req,res,next)
-});
-router.get('/search', function(req, res, next) {
-	$userSqlOperate.search(req,res,next)
-});
 
 /*banner*/
 router.get('/banner',function(req,res,next){
