@@ -2,21 +2,20 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
-const hash = crypto.createHash('md5');
 const log4js = require('log4js');
 const logger = log4js.getLogger('login');
 const common = require('../bin/common');
 const $loginServ = require('../service/loginServ');
+
 
 router.get('/', function(req, res, next) {
   res.render('login.html');
 });
 
 router.post('/login',function(req,res,next){
+	let hash = crypto.createHash('md5');
 	let userName = req.body.userName,
 		password = hash.update(req.body.password).digest('hex');
-	logger.info(userName);
-	logger.info(password);
 	$loginServ.getUser(userName,password).then((data)=>{
 		logger.info(data);
 		if(data.length > 0){
