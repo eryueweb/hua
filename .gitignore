@@ -1,12 +1,4 @@
-# Package Files
-*.jar
-*.war
-*.ear
-
-# eclipse conf
-.project
-
-# idea conf
+# idea
 *.iml
 .idea/
 
@@ -22,9 +14,16 @@ node_modules/
 _MACOSX/
 .DS_store
 
-#config
+# config
 proxy.js
 mysql.config.js
 mysqlConfig.js
+app.config.json
+.vscode/
+
+# pic
+huahua-pic/
+huahua-games/
+huahua-manager/
 
 

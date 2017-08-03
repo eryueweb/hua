@@ -59,7 +59,10 @@ let webpackConfig = {
 					{
 						loader: 'vue-loader',
 						options: {
-							postcss: [require('postcss-cssnext')()]
+							postcss: [require('postcss-cssnext')()],
+							loaders: {
+								scss: 'style-loader!css-loader!sass-loader'
+							}
 						}
 					}
 				]

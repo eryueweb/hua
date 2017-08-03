@@ -17,9 +17,12 @@
 			vHeader
 		},
 		mounted(){
-			if(window.navigator.userAgent.indexOf("Chrome") == -1 ){
+			var userAgent = window.navigator.userAgent;
+			var ieV = new RegExp("MSIE ([0-9]+\.[0-9]+)");
+			ieV.test(userAgent);
+			if(userAgent.indexOf("MSIE") != -1 && parseFloat(RegExp.$1)<11){
 				this.isShow = false;
-				alert('请切换至Chrome浏览器哦^_^')
+				alert('你的浏览器该更新了哦^_^')
 			}
 		}
 	}

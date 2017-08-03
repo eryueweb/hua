@@ -79,14 +79,8 @@
 						</div-->
 					</div>
 					<div class="side-part">
-						<div class="scrollbar">
-							<div class="side-waterfall">
-								<a href="javascript:" class="cell" v-for="(picItem,index) in sidePicListData" @click="picClick(picItem.type,picItem.id,index)">
-									<img :src="picItem.picUrl" />
-									<div class="cover" v-if="isCoverList[index]"></div>
-								</a>
-							</div>
-						</div>
+							<view-waterfall :isPicFall="false" :pic-width="86" :pic-spacing="2" :active-type="activeType" :pic-type="picType" :pic-id="picId" @picClick="picClick">
+							</view-waterfall>
 					</div>
 				</div>
 			</div>
@@ -94,29 +88,25 @@
 	</div>
 </template>
 <script>
+	import viewWaterfall from './viewWaterfall.vue';
+	const Ps = require('perfect-scrollbar');
 	export default{
 		name: 'pic-view',
+		components: {
+			viewWaterfall
+		},
 		props: ['isClose','picType','picId','picHeart','activeType'],
 		data(){
 			return {
 				picData: [],
-				sidePicListData: [],
-				isLoad: true,
-				isCoverArr: [],
-				picIndex: '',
 				picIdData: this.picId,
 				picTypeData: this.picType,
-				isPicinfo: false,
-				page: 1,
-				pageSize: 30
+				isPicinfo: false
 			}
 		},
 		computed: {
 			picDataConvert(){
 				return this.picData[0]
-			},
-			isCoverList(){
-				return this.isCoverArr
 			}
 		},
 		created(){
@@ -125,7 +115,6 @@
 		mounted(){
 			let vm = this;
 			vm.renderView(vm.picType,vm.picId);
-			vm.sidePicLoad();
 		},
 		methods: {
 			renderView(type,id){
@@ -144,47 +133,16 @@
 					this.picData[0].heartNum += 1;
 				}
 			},
-			sidePicLoad(){
-				let vm = this;
-				vm.$http.get('/data/pic/getPic/'+vm.activeType+'/'+vm.page+'/'+vm.pageSize).then(response=>{
-					if(response.body.length > 0){
-						response.body.forEach(function(val,i){
-							vm.sidePicListData.push(val);
-							if(val.id == vm.picId && val.type == vm.picType){
-								vm.isCoverArr.push(false);
-								vm.picIndex = i;
-							}else{
-								vm.isCoverArr.push(true)
-							}
-						});
-						if(response.body.length < 10){
-							vm.isLoad = false
-						}
-					}else{
-						vm.isLoad = false
-					}
-				});
-			},
-			/*未生效？？start*/
-			picHover(index){
-				this.isCoverList[index] = false;
-			},
-			picLeave(index){
-				this.isCoverList[index] = true;
-			},
 			/*未生效？？end*/
 			picClick(type,id,index){
 				let vm = this;
 				vm.renderView(type,id);
-				vm.isCoverList.forEach(function(val,i){
-					vm.isCoverList[i] = true;
-				});
-				vm.isCoverList[index] = false;
 			}
 		}
 	}
 </script>
 <style scoped>
+	@import '../stylesheets/perfect-scrollbar.min.css';
 	.pic-overlay-w{overflow: hidden;}
 	.pic-overlay{position: fixed;top: 0;left: 0;z-index: 20000;box-sizing: content-box;padding-right: 17px;width: 100%;height: 100%;background: rgba(229,229
 		,229,.95);overflow: auto;}
@@ -232,10 +190,6 @@
 
 	/*side part*/
 	.side-part{position: absolute;top: 0;right: 0;background: #fff;padding: 20px 3px 20px 20px;}
-	.scrollbar{position: relative;width: 277px;height: 480px;overflow: auto;}
 
-	.side-waterfall{position: relative;min-height: 480px;-webkit-column-width: 86px;-webkit-column-gap: 1px;}
-	.cell{position: relative;display: inline-block;margin: 1px;width: 86px;background: #fff;}
-	.cell img{width: 100%;}
-	.cell .cover{position: absolute;z-index: 100;top: 0;left: 0;width: 100%;height: 100%;background-color: rgba(255,255,255,.3);}
+
 </style>

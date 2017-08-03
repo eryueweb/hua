@@ -1,16 +1,14 @@
 <template>
 	<div id="header" class="clearfix" :class="{scrollHeaderBg: isScrollClass}">
+		<h1 class="logoItem"><router-link to="/" :class="{scrollLogo:isScrollClass}"></router-link></h1>
 		<div class="nav">
 			<ul class="nav-ul clearfix">
-				<li class="logoItem">
-					<router-link to="/" :class="{scrollLogo:isScrollClass}"></router-link>
-				</li>
 				<li v-for="(navVal,navKey) in navItems" class="navItem">
 					<router-link :to="{name:navKey}" :class="{scrollHeaderColor:isScrollClass}">{{navVal}}</router-link>
 				</li>
 			</ul>
 		</div>
-		<div class="search" v-if="isScrollClass">
+		<div class="search" v-show="isScrollClass">
 			<form action="" class="search-form">
 				<p class="search-w">
 					<input type="text" autocomplete="off" name="toSearch" id="toSearch" v-model="query" placeholder="搜索你喜欢的" @focus="isShowResult=true">
@@ -63,7 +61,7 @@
 		},
 		methods: {
 			headerScroll(){
-				var wScrollY = window.scrollY;
+				var wScrollY = window.scrollY || document.documentElement.scrollTop;
 				if(this.currentRoute == '/'){
 					if(wScrollY >= 300){
 						this.isScrollClass = true
@@ -151,11 +149,11 @@
 	.nav{float: left;}
 	.nav-ul li{float: left;margin-left: 15px;margin-right: 15px;}
 	li.navItem{margin-top: 17px;margin-bottom: 17px;}
-	li.logoItem{margin-top: 13px;}
-	li.logoItem a{display: block;width: 50px;height: 24px;background-image: url(../images/logo_2.png);background-size: 50px 24px;}
+	h1.logoItem{float: left;margin: 13px 15px 0;}
+	h1.logoItem a{display: block;width: 50px;height: 24px;background-image: url(../images/logo_2.png);background-size: 50px 24px;}
 	.nav-ul li a{color: rgba(255,255,255,.85);}
-	.search{position: relative;float: left;margin-top: 6px;margin-left: 150px;}
-	/*.search-w{display: inline-block;position: relative;}*/
+	.search{float: left;margin-top: 6px;margin-left: 150px;}
+	.search-w{position: relative;}
 	#toSearch{background-color: #fafafa;border: 1px solid #ddd;border-radius: 2px;padding: 0px 6px 0px 12px;outline: none;color: #bbb;font-size: 14px;height: 32px;width: 700px;}
 	.to-ret{position: absolute;top: 7px;right: 8px;}
 	i.fa-search{color: #c6c6c6;}

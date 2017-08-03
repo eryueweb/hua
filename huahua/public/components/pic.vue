@@ -12,33 +12,24 @@
 					</ul>
 				</div>
 			</div>
-			<!--  :style="{left:252*((index+1)%4)+'px',top:}" -->
 			<div class="main">
-				<div class="flowall">
-					<div class="picbox" v-for="(picItem,index) in picList">
-						<div class="act-w">
-							<a class="img-w" href="javascript:" @click="picView()" @mouseenter="mouseenterImg(picItem.type,picItem.id,index)" @mouseleave="mouseleaveImg(picItem.type,picItem.id,index)">
-								<img :src="picItem.picUrl" />
-								<div class="cover" v-if="picType===picItem.type&&picId===picItem.id"></div>
-							</a>
-							<a href="javascript:" class="action actionBg" v-if="picType===picItem.type&&picId===picItem.id" @mouseenter="mouseenterHeart(picItem.type,picItem.id,index)" @click.once="toHeart(picItem.type,picItem.id,index)"><i class="fa fa-heart" :class="{isHeart:isHeartList[index],noHeart:!isHeartList[index]}"></i></a>
-						</div>
-						<p class="text-w">{{picItem.instruction}}</p>
-						<p class="rate"><i class="fa fa-heart"></i><span class="like">{{picItem.heartNum}}</span></p>
-					</div>
-				</div>
+				<pic-waterfall :isPicFall='true' :active-type="activeType" :pic-type="picType" :pic-id="picId" :is-heart="isHeart" @preloaded="water" @picView="picView" @mouseenterImg="mouseenterImg" @mouseleaveImg="mouseleaveImg" @mouseenterHeart="mouseenterHeart" @toHeart="toHeart">
+				</pic-waterfall>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
 	import picView from './picView.vue';
+	import picWaterfall from './picWaterfall.vue';
+
 	const picTabListData = {latest: '最新',animal: '萌宠',comic: '漫画',scenery: '美景',character: '美人'};
 
 	export default{
 		name: 'v-pic',
 		components: {
-			picView
+			picView,
+			picWaterfall
 		},
 		data(){
 			return {
@@ -79,9 +70,9 @@
 		},
 		mounted(){
 			let vm = this;
-			vm.loadPic();
+			// vm.loadPic();
 			// 必须在函数内调用方法才会生效
-			window.addEventListener('scroll',function(){vm.scrollLoad()});
+			// window.addEventListener('scroll',function(){vm.scrollLoad()});
 			// 页面初始化－－－根据路径参数判断是否展示picView
 			vm.viewInit();
 		},
@@ -108,7 +99,7 @@
 				this.page = 1;
 				this.activeType = activeType;
 				this.isLoad = true;
-				this.loadPic()
+				// this.loadPic()
 			},
 			// 图片加载
 			loadPic(){
@@ -170,6 +161,9 @@
 					});
 					vm.isHeart = vm.isHeartList[index] = true;
 				}
+			},
+			water(){
+				console.log('water');
 			}
 		},
 		// 自定义指令
@@ -191,12 +185,11 @@
 	.tab{width: 500px;margin: 0 auto;}
 	.tab-ul li{float: left;width: 60px;margin: 0 20px;}
 	.tab-ul li a{display: block;padding: 10px 0;border-bottom: 1px solid transparent;}
-	/*.tab-ul li a.selected{font-weight: bold;border-bottom-color: #c90000;}*/
+	
 	.tab-ul.latest .latest,.tab-ul.animal .animal,.tab-ul.comic .comic,.tab-ul.scenery .scenery,.tab-ul.character .character{font-weight: bold;border-bottom-color: #c90000;}
 
 	.flowall{position: relative;min-height: 500px;width: 1400px;margin: 16px auto;-webkit-column-width: 236px;-webkit-column-gap: 5px;}
-	/*position: absolute;top: 0;left:0 ;*/
-	.picbox{position: relative;display: inline-block;margin: 2px;width: 236px;background: #fff;}
+	.picbox{position: relative;display: inline-block;margin: 2px;width: 236px;}
 	.img-w{position: relative;display: inline-block;}
 	.img-w img{width: 100%;}
 	.text-w{padding: 10px;font-size: 12px;color: #444;overflow: hidden;text-overflow:ellipsis;white-space:nowrap;}
@@ -209,4 +202,6 @@
 	.noHeart{color: #A6A6A6;}
 	.fa-heart.like-act{color: #f00;}
 	.cover{position:absolute;z-index: 2;top: 0;left: 0;width: 100%;height: 100%;background: rgba(255,255,255,.1);}
+
+	.main{position: relative;}
 </style>
