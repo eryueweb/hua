@@ -145,7 +145,7 @@
 	}
 </script>
 <style scoped>
-	#header{position: fixed;top: 0;left: 0;z-index: 10000;width: 100%;min-width: 1400px;height: 48px;}
+	#header{position: fixed;top: 0;left: 0;z-index: 10000;width: 100%;min-width: 1200px;height: 48px;}
 	.nav{float: left;}
 	.nav-ul li{float: left;margin-left: 15px;margin-right: 15px;}
 	li.navItem{margin-top: 17px;margin-bottom: 17px;}

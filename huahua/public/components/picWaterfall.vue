@@ -28,7 +28,7 @@
             },
             picWidth: {
                 type: Number,
-                default: 240
+                default: 232
             },
             activeType: {
                 type: String,
@@ -220,7 +220,8 @@
                 }
             },
             initColumnCount(){
-                winWidth = winWidth < 1400 ? 1400 : winWidth;
+                winWidth = winWidth < 1200 ? 1200 : winWidth;
+
                 if(winWidth >= this.picBoxWidth * 2){
                     this.columnCount = Math.floor(winWidth/this.picBoxWidth);
                 }else{

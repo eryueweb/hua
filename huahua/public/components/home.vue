@@ -38,7 +38,7 @@
 				<div class="picpro-main">
 					<div class="picpro-row clearfix" v-for="(picRowList,index) in picproListConvert" v-if="index%2 == 0">
 						<div class="picpro-imgbox">
-							<router-link :to="{name:'picView',params:{type:picRowList[0].type,id:picRowList[0].id}}" class="link-info"><img :src="picRowList[0].picUrl" width="280" height="280" /></router-link>
+							<router-link :to="{name:'picView',params:{type:picRowList[0].type,id:picRowList[0].id}}" class="link-info"><img :src="picRowList[0].picUrl" width="240" height="240" /></router-link>
 						</div>
 						<div class="picpro-rembox">
 							<div class="rem-infobox rem-infobox-l">
@@ -57,10 +57,10 @@
 							</div>
 						</div>
 						<div class="picpro-imgbox">
-							<router-link :to="{name:'picView',params:{type:picRowList[1].type,id:picRowList[1].id}}" class="link-info"><img :src="picRowList[1].picUrl" width="280" height="280" /></router-link>
+							<router-link :to="{name:'picView',params:{type:picRowList[1].type,id:picRowList[1].id}}" class="link-info"><img :src="picRowList[1].picUrl" width="240" height="240" /></router-link>
 						</div>
 						<div class="picpro-imgbox">
-							<router-link :to="{name:'picView',params:{type:picRowList[2].type,id:picRowList[2].id}}" class="link-info"><img :src="picRowList[2].picUrl" width="280" height="280" /></router-link>
+							<router-link :to="{name:'picView',params:{type:picRowList[2].type,id:picRowList[2].id}}" class="link-info"><img :src="picRowList[2].picUrl" width="240" height="240" /></router-link>
 						</div>
 						<div class="picpro-rembox">
 							<div class="rem-infobox rem-infobox-all all-t">
@@ -83,11 +83,11 @@
 							</div>
 						</div>
 						<div class="picpro-imgbox">
-							<router-link :to="{name:'picView',params:{type:picRowList[0].type,id:picRowList[0].id}}" class="link-info"><img :src="picRowList[0].picUrl" width="280" height="280" /></router-link>
+							<router-link :to="{name:'picView',params:{type:picRowList[0].type,id:picRowList[0].id}}" class="link-info"><img :src="picRowList[0].picUrl" width="240" height="240" /></router-link>
 						</div>
 						
 						<div class="picpro-imgbox">
-							<router-link :to="{name:'picView',params:{type:picRowList[1].type,id:picRowList[1].id}}" class="link-info"><img :src="picRowList[1].picUrl" width="280" height="280" /></router-link>
+							<router-link :to="{name:'picView',params:{type:picRowList[1].type,id:picRowList[1].id}}" class="link-info"><img :src="picRowList[1].picUrl" width="240" height="240" /></router-link>
 						</div>
 						<div class="picpro-rembox">
 							<div class="rem-infobox rem-infobox-l">
@@ -106,7 +106,7 @@
 							</div>
 						</div>
 						<div class="picpro-imgbox">
-							<router-link :to="{name:'picView',params:{type:picRowList[2].type,id:picRowList[2].id}}" class="link-info"><img :src="picRowList[2].picUrl" width="280" height="280" /></router-link>
+							<router-link :to="{name:'picView',params:{type:picRowList[2].type,id:picRowList[2].id}}" class="link-info"><img :src="picRowList[2].picUrl" width="240" height="240" /></router-link>
 						</div>
 					</div>
 				</div>
@@ -215,11 +215,11 @@
 	}
 </script>
 <style scoped>
-	.main{margin: 0 auto;width: 1400px;}
+	.main{margin: 0 auto;width: 1200px;}
 	.line{position: relative;color: #999;font-size: 16px;text-align: center;padding: 40px 0;}
 	.line span:before{position: absolute;top: 48px;left: 0;display: inline-block;width: 44%;content: '';border-top: 1px solid #ededed;}
 	.line span:after{position: absolute;top: 48px;right: 0;display: inline-block;width: 44%;content: '';border-top: 1px solid #ededed;}
-	.common-sort-ul li{float: left;width: 280px;text-align: center;color: #333;font-size: 16px;}
+	.common-sort-ul li{float: left;width: 240px;text-align: center;color: #333;font-size: 16px;}
 	.common-sort-ul li img{width: 200px;margin-bottom: 15px;}
 	
 	.link-info{display: block;}
@@ -239,16 +239,16 @@
 	.favou-three{float: left;margin-top: 25px;width: 38%;}
 
 	.picpro-imgbox,.picpro-rembox{float: left;}
-	.rem-infobox{width: 248px;padding: 10px 16px;background: #fff;}
-	.rem-infobox-l,.rem-infobox-r{height: 118px;}
+	.rem-infobox{width: 208px;padding: 5px 16px;background: #fff;}
+	.rem-infobox-l,.rem-infobox-r{height: 108px;}
 	#picpro h3{display: inline-block;color: #ededed;font-size: 30px;border-bottom: 1px solid #ededed;}
 	#picpro .rem-infobox-l h3,#picpro .rem-infobox-all h3{padding-right: 30px;}
 	#picpro .rem-infobox-r h3{padding-left: 30px;}
-	.picpro-t{font-size: 20px;padding: 10px 0;color: #222;}
+	.picpro-t{font-size: 20px;padding: 6px 0;color: #222;}
 	.picpro-row img{object-fit: cover;}
 
 	.rem-infobox-r{text-align: right;margin-top: 4px;}
-	.pic-author-w{margin-top: 15px;color: #999;}
+	.pic-author-w{margin-top: 12px;color: #999;}
 	.pic-author-w span{color: #9e7e6b;padding-left: 5px;}
 	.rem-infobox-all{height: 260px;}
 

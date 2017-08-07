@@ -13,7 +13,7 @@
 				</div>
 			</div>
 			<div class="main">
-				<pic-waterfall :isPicFall='true' :active-type="activeType" :pic-type="picType" :pic-id="picId" :is-heart="isHeart" @preloaded="water" @picView="picView" @mouseenterImg="mouseenterImg" @mouseleaveImg="mouseleaveImg" @mouseenterHeart="mouseenterHeart" @toHeart="toHeart">
+				<pic-waterfall :active-type="activeType" :pic-type="picType" :pic-id="picId" :is-heart="isHeart" @preloaded="water" @picView="picView" @mouseenterImg="mouseenterImg" @mouseleaveImg="mouseleaveImg" @mouseenterHeart="mouseenterHeart" @toHeart="toHeart">
 				</pic-waterfall>
 			</div>
 		</div>
@@ -203,5 +203,5 @@
 	.fa-heart.like-act{color: #f00;}
 	.cover{position:absolute;z-index: 2;top: 0;left: 0;width: 100%;height: 100%;background: rgba(255,255,255,.1);}
 
-	.main{position: relative;}
+	.main{position: relative;min-width: 1200px;}
 </style>
