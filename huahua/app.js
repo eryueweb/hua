@@ -6,6 +6,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var ejs = require('ejs');
+var compression = require('compression');
 // webpack
 var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
@@ -24,6 +25,8 @@ app.use(webpackDevMiddleware(compiler,{
       colors: true
   }
 }));
+
+app.use(compression());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
