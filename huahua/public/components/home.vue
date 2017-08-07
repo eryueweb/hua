@@ -233,10 +233,10 @@
 	.author{padding-right: 15px;}
 
 	.favou-top{height:340px;overflow: hidden;}
-	.favou-two{float: left;margin-top: 25px;width: 60%;margin-right: 2%;}
+	.favou-two{float: left;margin-top: 25px;width: 55%;margin-right: 2%;}
 	.favou-bottom{position: relative;height: 200px;padding: 20px;background: #fff;}
 
-	.favou-three{float: left;margin-top: 25px;width: 38%;}
+	.favou-three{float: left;margin-top: 25px;width: 43%;}
 
 	.picpro-imgbox,.picpro-rembox{float: left;}
 	.rem-infobox{width: 208px;padding: 5px 16px;background: #fff;}
@@ -250,10 +250,10 @@
 	.rem-infobox-r{text-align: right;margin-top: 4px;}
 	.pic-author-w{margin-top: 12px;color: #999;}
 	.pic-author-w span{color: #9e7e6b;padding-left: 5px;}
-	.rem-infobox-all{height: 260px;}
+	.rem-infobox-all{height: 230px;}
 
 	.all-b{text-align: right;}
-	.all-b .rem-data{padding-top: 142px;}
+	.all-b .rem-data{padding-top: 121px;}
 
 	.more-picbox{position: relative;margin: 30px 0;text-align: center;}
 	.more-btn{display: inline-block;width: 49%;font-size: 16px;color: #999;background: #fff;padding: 10px;}
