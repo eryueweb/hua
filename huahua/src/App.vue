@@ -29,7 +29,3 @@
 	}
 </script>
 
-<style>
-/*@import '.\assets\css\font-awesome\css\font-awesome.min.css';
-@import '.\assets\css\common.css';*/
-</style>
