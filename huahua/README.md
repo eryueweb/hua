@@ -1,4 +1,4 @@
-# hauhua
+# huahua
 
 > A Vue.js project
 
