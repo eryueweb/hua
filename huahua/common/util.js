@@ -26,16 +26,12 @@ var common = function(){
 		{
 			case ((timeDif/1000) < 60):
 				return '刚刚';
-				break;
 			case ((timeDif/1000/60) < 60):
 				return parseInt(timeDif/1000/60)+'分钟前';
-				break;
 			case ((timeDif/1000/60/60) < 24):
 				return parseInt(timeDif/1000/60/60)+'小时前';
-				break;
 			case ((timeDif/1000/60/60/24) < 30):
 				return parseInt(timeDif/1000/60/60/24)+'天前';
-				break;
 			default:
 				return _this.timeConvert(preTime)
 		}
