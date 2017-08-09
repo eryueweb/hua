@@ -4,7 +4,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
-import App from './app.vue';
+import App from './App.vue';
 import routers from './router/index.js';
 // 注册路由插件；
 Vue.use(VueRouter);
