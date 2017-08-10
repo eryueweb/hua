@@ -7,9 +7,11 @@
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "startup": "node startup/startup.js"
   },
   "dependencies": {
+    "ejs": "^2.5.7",
     "log4js": "^2.3.3",
     "mysql": "^2.14.1",
     "perfect-scrollbar": "^0.7.1",

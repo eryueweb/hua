@@ -9,7 +9,7 @@
     },
     {
       "name": "huahua",
-      "script": "huahua/build/build.js",
+      "script": "huahua/startup/startup.js",
       "cwd": "huahua",
       "watch": false,
       "log_date_format": "YYYY-MM-DD HH:mm Z"
