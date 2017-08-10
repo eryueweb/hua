@@ -65,7 +65,6 @@ hs
 │   ├── assets         // 资源目录
 │   ├── components     // 各种vue组件
 │   ├── App.vue        // vue主页面 
-│   ├── vuex           // vuex状态管理器
 │   ├── router         // vue路由配置
 │   └── main.js        // Webpack预编译入口
 </pre>
