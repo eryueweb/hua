@@ -1,4 +1,4 @@
-# 花花
+# 花花（[http://www.zhishangzhi.com](http://www.zhishangzhi.com)）
 
 > 本站是基于vue2.0（前台）+express4.0（后台）的实战项目。目前仅包含加载图片及文章的功能。后面会陆续有更多更全更好的功能。
 ### 首先
