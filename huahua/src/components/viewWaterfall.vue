@@ -49,7 +49,7 @@
                 columnCount: NaN,
                 beginIndex: NaN,
                 page: 1,
-                pageSize: 16,
+                pageSize: 20,
                 picBoxEls: null,
                 loadedCount: 0,
                 isPreloading: true,
