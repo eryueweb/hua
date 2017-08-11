@@ -13,7 +13,7 @@
 				</div>
 			</div>
 			<div class="main">
-				<pic-waterfall :active-type="activeType" :pic-type="picType" :pic-id="picId" :is-heart="isHeart" @preloaded="water" @picView="picView" @mouseenterImg="mouseenterImg" @mouseleaveImg="mouseleaveImg" @mouseenterHeart="mouseenterHeart" @toHeart="toHeart">
+				<pic-waterfall :active-type="activeType" :pic-type="picType" :pic-id="picId" :is-heart="isHeart" @picView="picView" @mouseenterImg="mouseenterImg" @mouseleaveImg="mouseleaveImg" @mouseenterHeart="mouseenterHeart" @toHeart="toHeart">
 				</pic-waterfall>
 			</div>
 		</div>
@@ -161,9 +161,6 @@
 					});
 					vm.isHeart = vm.isHeartList[index] = true;
 				}
-			},
-			water(){
-				console.log('water');
 			}
 		},
 		// 自定义指令

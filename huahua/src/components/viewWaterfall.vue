@@ -173,7 +173,6 @@
                     vm.isFirstTime = false;
                     vm.$nextTick(()=>{
                         vm.initPicBoxEls();
-                        console.log(vm.picTopData);
                         if(vm.picTopData.length == 0) vm.initPicTopData();
                         vm.waterfall();
                     })
@@ -191,7 +190,6 @@
                     vm.picBoxEls[i].style.top = 0;
                     this.picTopData.push(height);
                 }
-                console.log(vm.picTopData);
             },
             initColumnCount(){
                 this.columnCount = 3;
