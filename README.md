@@ -23,11 +23,11 @@
 ***
 项目地址：（`git clone`）
 ```bash
-git clone git@github.com:eryueweb/hua.git
+$ git clone git@github.com:eryueweb/hua.git
 ```
 通过`npm`安装本地服务第三方模块（需要已安装[Node.js](https://nodejs.org/)）
 ```bash
-npm install #现在的npm5.0已经神速了哦，新增了package-lock.json，啦啦啦。。
+$ npm install #现在的npm5.0已经神速了哦，新增了package-lock.json，啦啦啦。。
 ```
 本地启动服务
 ```bash
