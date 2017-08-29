@@ -5,9 +5,8 @@
 			<div class="pic-view">
 				<div class="pic-view-w">
 					<div class="main-part">
-						<div class="pic-info" v-if="isPicinfo">
+						<div class="pic-info" v-if="isLoadPicinfo">
 							<div class="tool-bar clearfix">
-								<a href="javascript:" class="like-btn t" @click.once="toHeart()"><i class="fa fa-heart" :class="{noHeart:!picHeart,isHeart:picHeart}"></i></a>
 								<a :href="picDataConvert.picUrl" target="_blank" class="plus-btn"><i class="fa fa-search-plus"></i></a>
 							</div>
 							<div class="main-img">
@@ -19,7 +18,6 @@
 								<p class="brief-con">{{picDataConvert.instruction}}</p>
 							</div>
 							<div class="tool-bar-bottom clearfix">
-								<a href="javascript:" class="like-btn b" @click.once="toHeart()"><i class="fa fa-heart" :class="{noHeart:!picHeart,isHeart:picHeart}"></i>喜欢<span class="like-num"> {{picDataConvert.heartNum}}</span></a>
 								<!--a href="javascript:" class="comment-btn"><i class="fa fa-comment b"></i>评论<span class="comment-num">10</span></a-->
 								<p class="time-w">采于<span class="collect-time">{{picDataConvert.collectConvertDate}}</span></p>
 							</div>
@@ -79,7 +77,7 @@
 						</div-->
 					</div>
 					<div class="side-part">
-							<view-waterfall :isPicFall="false" :pic-width="86" :pic-spacing="2" :active-type="activeType" :pic-type="picType" :pic-id="picId" @picClick="picClick">
+							<view-waterfall :pic-width="86" :pic-spacing="2" :active-type="activeType" :pic-type="picType" :pic-id="picId" @picClick="picClick">
 							</view-waterfall>
 					</div>
 				</div>
@@ -88,26 +86,29 @@
 	</div>
 </template>
 <script>
-	import viewWaterfall from './viewWaterfall.vue';
+	import {mapState} from 'Vuex';
+	import viewWaterfall from '@/components/viewWaterfall';
 	const Ps = require('perfect-scrollbar');
 	export default{
 		name: 'pic-view',
 		components: {
 			viewWaterfall
 		},
-		props: ['isClose','picType','picId','picHeart','activeType'],
+		props: ['isClose','activeType'],
 		data(){
 			return {
 				picData: [],
-				picIdData: this.picId,
-				picTypeData: this.picType,
-				isPicinfo: false
+				isLoadPicinfo: false
 			}
 		},
 		computed: {
 			picDataConvert(){
 				return this.picData[0]
-			}
+			},
+			...mapState({
+				picId: state=>state.picModule.checkedPicId,
+				picType: state=>state.picModule.checkedPicType
+			})
 		},
 		created(){
 			document.body.style.overflow = 'hidden';
@@ -121,21 +122,16 @@
 				let vm = this;
 				vm.$http.get('/data/pic/getPicView/'+type+'/'+id).then(response=>{
 					vm.picData = response.body;
-					vm.isPicinfo = true
+					vm.isLoadPicinfo = true
 				});
 			},
 			picView(){
 				this.$emit('close')
 			},
-			toHeart(){
-				if(!(this.picHeart)){
-					this.$emit('like');
-					this.picData[0].heartNum += 1;
-				}
-			},
-			/*未生效？？end*/
-			picClick(type,id,index){
+			picClick(type,id){
 				let vm = this;
+				vm.$store.state.picModule.checkedPicId = id;
+				vm.$store.state.picModule.checkedPicType = type;
 				vm.renderView(type,id);
 			}
 		}
@@ -152,14 +148,13 @@
 	.pic-info{padding: 20px;width: 100%;background: #fff;}
 	.main-img-w{display: inline-block;width: 658px;text-align: center;}
 	.main-img img{max-width: 658px;}
-	.like-btn.t,.plus-btn{display: inline-block;padding: 6px 8px;border: 1px solid rgba(0,0,0,.2);background: #fff;background: linear-gradient(#fafafa,#f2f2f2);-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;}
-	.like-btn.t{float: left;}
+	.plus-btn{display: inline-block;padding: 6px 8px;border: 1px solid rgba(0,0,0,.2);background: #fff;background: linear-gradient(#fafafa,#f2f2f2);-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;}
 	.plus-btn{float: right;}
 	.main-img{margin-top: 12px;}
 	.tool-bar-bottom{margin-top: 15px;}
 	.tool-bar-bottom i{margin-right: 5px;}
 	.comment-btn{margin-left: 10px;}
-	.like-btn.b,.comment-btn{float: left;display: inline-block;background: #fafafa;border: 1px solid #ededed;padding: 5px 10px;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;font-size: 14px;color: #444;}
+	.comment-btn{float: left;display: inline-block;background: #fafafa;border: 1px solid #ededed;padding: 5px 10px;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;font-size: 14px;color: #444;}
 	.like-num,.comment-num{color: #999;}
 	.isHeart{color: #f00;}
 	.noHeart{color: #A6A6A6;}

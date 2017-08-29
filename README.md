@@ -14,6 +14,7 @@
 * vue-cli
 * vue
 * vue-resource
+* vuex
 * vue-router
 * express
 * mysql
@@ -66,6 +67,7 @@ $ hs
 │   ├── components     # 各种vue组件
 │   ├── App.vue        # vue主页面 
 │   ├── router         # vue路由配置
+│   ├── store          # vuex配置
 │   └── main.js        # Webpack预编译入口
 ```
 > 本项目启动需要搭建数据库哦，或自行改成静态的，或仅供参考，aaa

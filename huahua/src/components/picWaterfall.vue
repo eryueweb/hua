@@ -2,11 +2,11 @@
     <div>
         <div v-for="(picItem,i) in picDataC" class="pic-box" :style="{padding: picSpacing/2+'px',width: isMobile?'':picBoxWidth+'px','box-sizing':'border-box'}">
             <div class="act-w" :style="{width: picWidthC+'px',height:picItem.height?picItem.height+'px':''}">
-                <a class="img-w" href="javascript:" @click="picView()" @mouseenter="mouseenterImg(picItem.type,picItem.id,i)" @mouseleave="mouseleaveImg(picItem.type,picItem.id,i)">
+                <a class="img-w" href="javascript:" @click="picView(i)" @mouseenter="mouseenterImg(picItem.type,picItem.id,i)" @mouseleave="mouseleaveImg(picItem.type,picItem.id,i)">
                     <img :src="picItem.picUrl" />
-                    <div class="cover" v-if="picType===picItem.type&&picId===picItem.id"></div>
+                    <div class="cover" v-if="checkedPicType===picItem.type&&checkedPicId===picItem.id"></div>
                 </a>
-                <a href="javascript:" class="action actionBg" v-if="picType===picItem.type&&picId===picItem.id" @mouseenter="mouseenterHeart(picItem.type,picItem.id,i)" @click.once="toHeart(picItem.type,picItem.id,i)"><i class="fa fa-heart" :class="{isHeart:isHeartList[i],noHeart:!isHeartList[i]}"></i></a>
+                <a href="javascript:" class="action actionBg" v-if="checkedPicType===picItem.type&&checkedPicId===picItem.id" @mouseenter="mouseenterHeart(picItem.type,picItem.id,i)" @click="toHeart(picItem.type,picItem.id,i)"><i class="fa fa-heart" :class="{isHeart:isHeartList[i],noHeart:!isHeartList[i]}"></i></a>
             </div>
             <p class="text-w">{{picItem.instruction}}</p>
             <p class="rate"><i class="fa fa-heart"></i><span class="like">{{picItem.heartNum}}</span></p>
@@ -18,7 +18,10 @@
     </div>
 </template>
 <script>
+    import {mapState} from 'vuex';
+
     let winWidth = document.body.clientWidth;
+
     export default{
         name: 'pic-waterfall',
         props: {
@@ -34,11 +37,8 @@
                 type: String,
                 required: true
             },
-            picType: {
-                type: String,
-                required: true
-            },
-            picId: {
+            isView: {
+                type: Boolean,
                 required: true
             }
         },
@@ -46,11 +46,9 @@
             return {
                 scroll: 0,
                 isLoad: true,
-                picData: [],
                 picDataC: [],
                 picTopData: [],
                 isCoverArr: [],
-                isHeartArr:[],
                 columnCount: NaN,
                 beginIndex: NaN,
                 page: 1,
@@ -81,9 +79,8 @@
                 }
             },
             activeType(v){
-                this.picData = [];
+                this.$store.state.picModule.picData = [];
                 this.picTopData = [];
-                this.isHeartArr = [];
                 this.page = 1;
                 this.loadedCount = 0;
                 this.isLoad = true;
@@ -103,12 +100,12 @@
             picWidthC(){
                 return this.isMobile ? window.innerWidth/2 - this.picSpacing : this.picWidth
             },
-            isHeartList(){
-                return this.isHeartArr
-            },
-            isCoverList(){
-                return this.isCoverArr
-            }
+            ...mapState({
+                isHeartList: state=>state.picModule.isHeartList,
+                picData: state=>state.picModule.picData,
+                checkedPicId: state=>state.picModule.checkedPicId,
+                checkedPicType: state=>state.picModule.checkedPicType
+            })
         },
         mounted(){
             let vm = this;
@@ -130,6 +127,18 @@
 
         },
         methods: {
+            getHeartList(index){
+                this.$store.commit('GET_ISHEART_LIST',{index:index})
+            },
+            getPicData(val){
+                this.$store.commit('GET_PICDATA_LIST',{val:val})
+            },
+            changeHeartFlag(index){
+                this.$store.commit('CHANGE_HEART_FLAG',{index:index})
+            },
+            checkedPicInfo(id,type,index){
+                this.$store.commit('CHECKED_PIC_INFO',{id:id,type:type,index:index});
+            },
             waterfall(){
                 let vm = this;
                 for(let i=vm.beginIndex;i<vm.picNum;i++){
@@ -155,10 +164,8 @@
                     let len = response.body.length+vm.pageSize*(vm.page-1);
                     if(response.body.length > 0){
                         response.body.forEach(function(val,i){
-                            vm.picData.push(val);
-
-                            vm.isHeartArr[i] = false;
-
+                            vm.getHeartList(i);
+                            vm.getPicData(val);
                             if((vm.pageSize*(vm.page-1)+i)<vm.loadedCount) return;
                             let oImg = new Image();
                             oImg.src = val.picUrl;
@@ -191,20 +198,31 @@
                     })
                 }
             },
-            picView(){
+            picView(i){
+                this.$store.state.picModule.isHeartPicView = this.isHeartList[i];
                 this.$emit('picView')
             },
             mouseenterImg(type,id,index){
-                this.$emit('mouseenterImg',type,id,index)
+                this.checkedPicInfo(id,type,index)
             },
             mouseleaveImg(type,id,index){
-                this.$emit('mouseleaveImg',type,id,index)
+                if(!(this.isView)){
+                    this.checkedPicInfo(NaN,'',NaN)
+                }
             },
             mouseenterHeart(type,id,index){
-                this.$emit('mouseenterHeart',type,id,index)
+                this.checkedPicInfo(id,type,index)
             },
             toHeart(type,id,index){
-                this.$emit('toHeart',type,id,index)
+                let vm = this;
+                if(!vm.isHeartList[index]){
+                    // 改变heart状态
+                    vm.changeHeartFlag(index);
+                    // 增加hrartNum
+                    vm.$http.get('/data/pic/toHeart/'+type+'/'+id).then(response=>{
+                        if(response.body.code == 200) vm.picDataC[index].heartNum+=1;
+                    });
+                }
             },
             initPicTopData(){
                 let vm = this;

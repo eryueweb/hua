@@ -14,6 +14,7 @@
     </div>
 </template>
 <script>
+    import {mapState} from 'Vuex';
     const Ps = require('perfect-scrollbar');
     const winWidth = 277;
     export default{
@@ -114,6 +115,18 @@
 
         },
         methods: {
+            getHeartList(index){
+                this.$store.commit('GET_ISHEART_LIST',{index:index})
+            },
+            getPicData(val){
+                this.$store.commit('GET_PICDATA_LIST',{val:val})
+            },
+            changeHeartFlag(index){
+                this.$store.commit('CHANGE_HEART_FLAG',{index:index})
+            },
+            checkedPicInfo(id,type,index){
+                this.$store.commit('CHECKED_PIC_INFO',{id:id,type:type,index:index});
+            },
             waterfall(){
                 let vm = this;
                 for(let i=vm.beginIndex;i<vm.picNum;i++){

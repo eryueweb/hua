@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<pic-view :is-close="isPicView" :pic-type="picType"  :pic-id="picId" :pic-heart="isHeart" :active-type="activeType" v-if="isPicView" @close="picView()" @like="toHeart(picType,picId,picIndex)"></pic-view>
+		<pic-view :is-close="isPicView" :active-type="activeType" v-if="isPicView" @close="picView()"></pic-view>
 		<div class="container">
 			<div class="header">
 				<div class="header-t"><span>{{picTabListData[activeType]}}</span></div>
@@ -13,15 +13,15 @@
 				</div>
 			</div>
 			<div class="main">
-				<pic-waterfall :active-type="activeType" :pic-type="picType" :pic-id="picId" :is-heart="isHeart" @picView="picView" @mouseenterImg="mouseenterImg" @mouseleaveImg="mouseleaveImg" @mouseenterHeart="mouseenterHeart" @toHeart="toHeart">
+				<pic-waterfall :active-type="activeType" :is-view="isPicView" @picView="picView">
 				</pic-waterfall>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
-	import picView from './picView.vue';
-	import picWaterfall from './picWaterfall.vue';
+	import picView from '@/components/picView';
+	import picWaterfall from '@/components/picWaterfall';
 
 	const picTabListData = {latest: '最新',animal: '萌宠',comic: '漫画',scenery: '美景',character: '美人'};
 
@@ -33,44 +33,21 @@
 		},
 		data(){
 			return {
-				scroll: 0,    //滚动距离
-				isLoad: true,  //是否可以继续下拉加载
 				isPicView: false,   //是否是查看图片页面
 				picType: '',    //当前查看或即将查看的图片类型
 				picId: '',	    //当前查看或即将查看的图片ID
-				picIndex: 0,	//当前查看或即将查看的图片索引
-				isHeart: false, //当前查看或即将查看的图片是否已喜欢
-				isHeartArr: [],
 				activeType: 'latest',
-				picTabListData: picTabListData,
-				picListData: [],
-				page: 1,
-				pageSize: 10
+				picTabListData: picTabListData
 			}
 		},
 		watch: {
-			scroll(val){
-				if(val == (document.body.scrollHeight-window.innerHeight) && this.isLoad){
-					this.page += 1;
-					this.loadPic()
-				}
-			},
 			'$route': 'viewInit'
-		},
-		computed: {
-			picList(){
-				return this.picListData
-			},
-			isHeartList(){
-				return this.isHeartArr
-			}
 		},
 		created(){
 			document.body.style.backgroundColor = '#f7f7f7';
 		},
 		mounted(){
 			let vm = this;
-			// vm.loadPic();
 			// 必须在函数内调用方法才会生效
 			// window.addEventListener('scroll',function(){vm.scrollLoad()});
 			// 页面初始化－－－根据路径参数判断是否展示picView
@@ -95,33 +72,7 @@
 			},
 			// 导航切换
 			changeNav(activeType){
-				this.picListData = [];
-				this.page = 1;
 				this.activeType = activeType;
-				this.isLoad = true;
-				// this.loadPic()
-			},
-			// 图片加载
-			loadPic(){
-				let vm = this;
-				vm.$http.get('/data/pic/getPic/'+vm.activeType+'/'+vm.page+'/'+vm.pageSize).then(response=>{
-					if(response.body.length > 0){
-						response.body.forEach(function(val,i){
-							vm.picListData.push(val);
-							vm.isHeartArr[i] = false
-						});
-						if(response.body.length < 10){
-							vm.isLoad = false
-						}
-					}else{
-						vm.isLoad = false
-					}
-					
-				});
-			},
-			// 滚动加载
-			scrollLoad(){
-				this.scroll = window.scrollY;
 			},
 			// 查看pic
 			picView(){
@@ -130,46 +81,6 @@
 					window.location.href = '/#/pic'
 				}
 				this.isPicView = !(this.isPicView);
-			},
-			// 图片遮罩
-			mouseenterImg(type,id,index){
-				this.picType = type;
-				this.picId = id;
-				this.isHeart = this.isHeartList[index];
-				this.picIndex = index;
-			},
-			mouseleaveImg(type,id,index){
-				if(!(this.isPicView)){
-					this.picType = '';
-					this.picId = '';
-					this.isHeart = false;
-					this.picIndex = 0;
-				}
-			},
-			mouseenterHeart(type,id,index){
-				this.picType = type;
-				this.picId = id;
-				this.isHeart = this.isHeartList[index];
-				this.picIndex = index;
-			},
-			// 喜欢action
-			toHeart(type,id,index){
-				let vm = this;
-				if(!vm.isHeartList[index]){
-					vm.$http.get('/data/pic/toHeart/'+type+'/'+id).then(response=>{
-						if(response.body.code == 200) vm.picListData[index].heartNum+=1;
-					});
-					vm.isHeart = vm.isHeartList[index] = true;
-				}
-			}
-		},
-		// 自定义指令
-		directives: {
-			demo: {
-				bind(el,binding){
-						var fnc = binding.value; 
-						fnc(); 
-				}
 			}
 		}
 	}

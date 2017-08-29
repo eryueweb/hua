@@ -6,6 +6,7 @@ import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
 import App from './App.vue';
 import routers from './router/index.js';
+import store from './store'
 // 注册路由插件；
 Vue.use(VueRouter);
 Vue.use(VueResource);
@@ -18,6 +19,7 @@ const router = new VueRouter({
 // 创建根实例
 new Vue({
 	router,
+	store,
 	render(h){
 		return h(App)
 	}
