@@ -14,7 +14,7 @@
     </div>
 </template>
 <script>
-    import {mapState} from 'Vuex';
+    import {mapState} from 'vuex';
     const Ps = require('perfect-scrollbar');
     const winWidth = 277;
     export default{

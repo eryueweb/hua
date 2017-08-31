@@ -86,7 +86,7 @@
 	</div>
 </template>
 <script>
-	import {mapState} from 'Vuex';
+	import {mapState} from 'vuex';
 	import viewWaterfall from '@/components/viewWaterfall';
 	const Ps = require('perfect-scrollbar');
 	export default{
